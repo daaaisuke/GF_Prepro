@@ -1,0 +1,85 @@
+div.top-title
+  div.left-button
+    = link_to "前の登録を取り消し", image_delete_path, method: :delete, data: {confirm: "取り消しますか？"}, class: "btn btn-danger"
+  div.right-button align="right"
+    = link_to "次の画像へ", image_next_path, method: :post, class: "btn btn-warning"
+
+div.float2
+  div#main-image
+    = image_tag @image, id:"image"
+    div.child id="text-pos"
+    - @blocks.each do |blk|
+      div.child style="top: #{blk[:y]}px; left:#{blk[:x]}px; width:#{blk[:width]}px; height:#{blk[:height]}px;"
+    
+div.float2
+  div.form
+    = form_for(:pos, url: image_register_path, method: :post) do |f|
+      div.form-group
+        = f.label :pos1, "１．左上の座標"
+      div.form-group
+        div.form-inline
+          = f.label :pos1, "x :", style: "margin-right:10px;"
+          = f.number_field :pos1_x1, id: 'x1', class: "form-control", style: "width:100px; margin-right:30px;"
+          = f.label :pos1, "y :", style: "margin-right:10px;"
+          = f.number_field :pos1_y1, id: 'y1', class: "form-control", style: "width:100px; margin-right:30px;"
+      div.form-group
+        = f.label :pos2, "２．右下の座標"
+      div.form-group
+        div.form-inline
+          = f.label :pos2, "x :", style: "margin-right:10px;"
+          = f.number_field :pos2_x2, id: 'x2', class: "form-control", style: "width:100px; margin-right:30px;"
+          = f.label :pos2, "y :", style: "margin-right:10px;"
+          = f.number_field :pos2_y2, id: 'y2', class: "form-control", style: "width:100px; margin-right:30px;"
+      div.form-group
+        = f.label :text, "３．テキスト"
+        = f.select :text, ['ドア','窓','風呂','階段','玄関','和室','トイレ','キッチン'], class:"form-control", style:"height: 200px;"
+      div.form-group
+        = f.submit "登録", class:"btn btn-primary"
+  
+    div
+      = link_to "リセット", root_path
+
+javascript:
+
+  count = 1  // ボタンで使うカウンター
+
+  document.getElementById( "main-image" ).addEventListener( "click", function( e ) {
+  	// マウス位置を取得する
+  	var mouseX = e.pageX ;	// X座標
+  	var mouseY = e.pageY ;	// Y座標
+    
+    // 要素の位置を取得
+    var element = document.getElementById( "main-image" ) ;
+    var rect = element.getBoundingClientRect();
+    
+    // 要素の位置座標を計算
+    var positionX = rect.left + window.pageXOffset ;	// 要素のX座標
+    var positionY = rect.top  + window.pageYOffset ;	// 要素のY座標
+    
+    // 要素の左上からの距離を計算
+    var X = mouseX - positionX;
+    var Y = mouseY - positionY;
+    
+    // formの要素のvalueに代入
+    $('#x'+count).val(X);
+    $('#y'+count).val(Y);
+    
+    console.log([count, X, Y]);
+    
+    // count up
+    count += 1
+    
+    if(count > 1) {
+       var element = document.getElementById("text-pos"); 
+       var x1 = $('#x1').val();
+       var y1 = $('#y1').val();
+       var x2 = $('#x2').val();
+       var y2 = $('#y2').val();
+       var width  = x2 - x1;
+       var height = y2 - y1;
+       element.style.width  = width  + 'px'; 
+       element.style.height = height + 'px'; 
+       element.style.top  = y1 + 'px'; 
+       element.style.left = x1 + 'px'; 
+    }
+  } ) ;

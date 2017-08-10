@@ -1,0 +1,2 @@
+module Image::RegisterHelper
+end
