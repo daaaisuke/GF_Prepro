@@ -71,7 +71,7 @@ class Image::RegisterController < ApplicationController
     TmpImage.delete_all
     TextBlock.delete_all
     # 最初の画像を指定する ※ サンプル画像以外の場合はこちらを書き換え
-    image = Image.create(filename:"suumo00751.jpeg")
+    image = Image.create(filename:"suumo00751.jpg")
     TmpImage.create(filename:image[:filename], image_id: image.id)
     redirect_to root_path
   end
