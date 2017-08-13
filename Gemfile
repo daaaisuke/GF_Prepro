@@ -19,7 +19,5 @@ gem 'web-console'
 gem 'listen', '~> 3.0.5'
 gem 'spring'
 gem 'spring-watcher-listen', '~> 2.0.0'
-group :production do
-    gem 'pg'
-    gem 'rails_12factor'
-end
+gem 'pg'
+gem 'rails_12factor'
