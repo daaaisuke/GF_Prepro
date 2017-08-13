@@ -15,7 +15,7 @@ gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'pry-rails'
 gem 'pry-doc'
-gem 'web-console'
+gem 'web-console', group: :development
 gem 'listen', '~> 3.0.5'
 gem 'spring'
 gem 'spring-watcher-listen', '~> 2.0.0'
