@@ -3,7 +3,8 @@ div.top-title
     = link_to "前の登録を取り消し", image_delete_path, method: :delete, data: {confirm: "取り消しますか？"}, class: "btn btn-danger"
   div.right-button align="right"
     = link_to "次の画像へ", image_next_path, method: :post, class: "btn btn-warning"
-
+div style=" display:inline-block; font-size:2em;"
+    = @count.to_s+"/250"
 div.float2
   div#main-image
     = image_tag @image, id:"image"
@@ -32,7 +33,7 @@ div.float2
           = f.number_field :pos2_y2, id: 'y2', class: "form-control", style: "width:100px; margin-right:30px;"
       div.form-group
         = f.label :text, "３．テキスト"
-        = f.select :text, ['ドア','窓','風呂','階段','玄関','和室','トイレ','キッチン'], class:"form-control", style:"height: 200px;"
+        = f.select :text, ['ドア','窓','風呂','階段','玄関','和室','トイレ','キッチン','ユニットバス'], class:"form-control", style:"height: 200px;"
       div.form-group
         = f.submit "登録", class:"btn btn-primary"
   

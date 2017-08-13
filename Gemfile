@@ -15,7 +15,7 @@ gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'pry-rails'
 gem 'pry-doc'
-gem 'sqlite3'
+gem 'pg', group: :production
 gem 'web-console'
 gem 'listen', '~> 3.0.5'
 gem 'spring'

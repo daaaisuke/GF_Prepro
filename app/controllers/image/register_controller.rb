@@ -5,6 +5,7 @@ class Image::RegisterController < ApplicationController
     tmp = TmpImage.first
     @image = tmp[:filename]
     @blocks = TextBlock.view_css(tmp[:image_id])
+    @count = Image.count
   end
 
 
@@ -70,7 +71,7 @@ class Image::RegisterController < ApplicationController
     TmpImage.delete_all
     TextBlock.delete_all
     # 最初の画像を指定する ※ サンプル画像以外の場合はこちらを書き換え
-    image = Image.create(filename:"test1.jpeg")
+    image = Image.create(filename:"suumo00751.jpeg")
     TmpImage.create(filename:image[:filename], image_id: image.id)
     redirect_to root_path
   end
